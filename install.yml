@@ -1,6 +1,6 @@
 ---
 # Test
-
+hosts: ANS
 - name: Pyvmomi Uzerinden baglan
   community.vmware.vmware_about_info:
     hostname: 172.16.10.44
