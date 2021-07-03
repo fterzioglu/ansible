@@ -1,0 +1,19 @@
+- name: Virutal Machine - Snapshot, Shutdown, Upgrade Hardware, verify, Power on
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Gather all registered virtual machines
+      community.vmware.vmware_deploy_ovf:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        datacenter: Datacenter1
+        cluster: Cluster1
+        datastore: vsandatastore
+        name: NewVM
+        networks: "{u'VM Network':u'{{ ProvisioningNetworkLabel }}'}"
+        validate_certs: no
+        power_on: no
+        ovf: /absolute/path/to/template/mytemplate.ova
+      delegate_to: localhost
