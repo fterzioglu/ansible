@@ -1,16 +1,17 @@
----
-# Port Grup Oluşturma
-
-- name: Pyvmomi Uzerinden baglan
+- name: Virutal Machine - Snapshot, Shutdown, Upgrade Hardware, verify, Power on
   hosts: localhost
-  gather_facts: false
-  connection: local
+  gather_facts: no
+
   tasks:
-    - name: Add Management Network VM Portgroup
-      community.vmware.vmware_about_info:
+    - name: Gather all registered virtual machines
+      community.vmware.vmware_vm_info:
         hostname: 172.16.10.44
-        username: administrator@vsphere.local	
+        username: administrator@vsphere.local
         password: Roma2016**
-      validate_certs: no
+        vm_type: vm
+        validate_certs: no
       delegate_to: localhost
-      register: Vcenter_about_inf
+      register: vminfo
+
+    - debug:
+        var: vminfo
