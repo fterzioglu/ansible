@@ -2,7 +2,7 @@
 # Port Grup Oluşturma
 
 - name: Pyvmomi Uzerinden baglan
-  hosts: ANS
+  hosts: localhost
   gather_facts: false
   connection: local
   tasks:
