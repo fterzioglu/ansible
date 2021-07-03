@@ -1,10 +1,15 @@
 ---
-# Test
-hosts: ANS
+# Port Grup Oluşturma
+
 - name: Pyvmomi Uzerinden baglan
-  community.vmware.vmware_about_info:
-    hostname: 172.16.10.44
-    username: administrator@vsphere.local	
-    password: Roma2016**
-  delegate_to: localhost
-  register: Vcenter_about_info
+  hosts: ANS
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Add Management Network VM Portgroup
+      community.vmware.vmware_about_info:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local	
+        password: Roma2016**
+      delegate_to: localhost
+      register: Vcenter_about_inf
