@@ -28,3 +28,63 @@
         power_on: yes
         ovf: /var/lib/awx/template.ova
       delegate_to: localhost
+
+    - name: Change ip address of guest machine
+      community.vmware.vmware_vm_shell:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        validate_certs: no
+        datacenter: DemoDC
+        folder: DemoDC/vm/WazuhServer
+        vm_id: NewVM
+        vm_username: root
+        vm_password: Roma2016**
+        vm_shell: "/usr/bin/nmcli"
+        vm_shell_args: "connection modify ens160 IPv4.address 172.16.10.41"
+      delegate_to: localhost
+     
+     - name: Change gw of guest machine
+      community.vmware.vmware_vm_shell:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        validate_certs: no
+        datacenter: DemoDC
+        folder: DemoDC/vm/WazuhServer
+        vm_id: NewVM
+        vm_username: root
+        vm_password: Roma2016**
+        vm_shell: "/usr/bin/nmcli"
+        vm_shell_args: "connection modify ens160 IPv4.gateway 172.16.10.1"
+      delegate_to: localhost
+
+     - name: Change dns s of guest machine
+      community.vmware.vmware_vm_shell:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        validate_certs: no
+        datacenter: DemoDC
+        folder: DemoDC/vm/WazuhServer
+        vm_id: NewVM
+        vm_username: root
+        vm_password: Roma2016**
+        vm_shell: "/usr/bin/nmcli"
+        vm_shell_args: "connection modify ens160 IPv4.dns 8.8.8.8"
+      delegate_to: localhost
+      
+     - name: restart_services
+      community.vmware.vmware_vm_shell:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        validate_certs: no
+        datacenter: DemoDC
+        folder: DemoDC/vm/WazuhServer
+        vm_id: NewVM
+        vm_username: root
+        vm_password: Roma2016**
+        vm_shell: "/usr/bin/nmcli"
+        vm_shell_args: "networking off && nmcli networking on"
+      delegate_to: localhost      
