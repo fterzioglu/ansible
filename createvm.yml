@@ -25,6 +25,6 @@
         name: NewVM
         folder: DemoDC/vm/WazuhServer
         validate_certs: no
-        power_on: no
+        power_on: yes
         ovf: /var/lib/awx/template.ova
       delegate_to: localhost
