@@ -91,9 +91,9 @@
         vm_shell_args: "networking off && nmcli networking on"
       delegate_to: localhost      
   
-     - pause: seconds=10
+    - pause: seconds=10
      
-     - name: restart_services
+    - name: restart_services
       community.vmware.vmware_vm_shell:
         hostname: 172.16.10.44
         username: administrator@vsphere.local
