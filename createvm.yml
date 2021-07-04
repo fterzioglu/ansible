@@ -28,6 +28,8 @@
         power_on: yes
         ovf: /var/lib/awx/template.ova
       delegate_to: localhost
+    
+    - pause: seconds=120
 
     - name: Change ip address of guest machine
       community.vmware.vmware_vm_shell:
