@@ -3,6 +3,16 @@
   gather_facts: no
 
   tasks:
+    - name: Create a sub folder under VM folder on given datacenter
+      community.vmware.vcenter_folder:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        datacenter: DemoDC
+        folder_name: WazuhServer
+        state: present
+      delegate_to: localhost
+      
     - name: Gather all registered virtual machines
       community.vmware.vmware_deploy_ovf:
         hostname: 172.16.10.44
