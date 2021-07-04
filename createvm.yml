@@ -10,7 +10,7 @@
         password: Roma2016**
         datacenter: DemoDC
         cluster: DemoCS
-        datastore: data
+        datastore: Data
         name: NewVM
         validate_certs: no
         power_on: no
