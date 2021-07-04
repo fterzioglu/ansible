@@ -44,7 +44,7 @@
         vm_shell_args: "connection modify ens160 IPv4.address 172.16.10.41"
       delegate_to: localhost
      
-     - name: Change gw of guest machine
+    - name: Change gw of guest machine
       community.vmware.vmware_vm_shell:
         hostname: 172.16.10.44
         username: administrator@vsphere.local
@@ -59,7 +59,7 @@
         vm_shell_args: "connection modify ens160 IPv4.gateway 172.16.10.1"
       delegate_to: localhost
 
-     - name: Change dns s of guest machine
+    - name: Change dns s of guest machine
       community.vmware.vmware_vm_shell:
         hostname: 172.16.10.44
         username: administrator@vsphere.local
@@ -74,7 +74,7 @@
         vm_shell_args: "connection modify ens160 IPv4.dns 8.8.8.8"
       delegate_to: localhost
       
-     - name: restart_services
+    - name: restart_services
       community.vmware.vmware_vm_shell:
         hostname: 172.16.10.44
         username: administrator@vsphere.local
