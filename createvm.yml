@@ -11,6 +11,7 @@
         datacenter: DemoDC
         folder_name: WazuhServer
         state: present
+        validate_certs: no
       delegate_to: localhost
       
     - name: Gather all registered virtual machines
