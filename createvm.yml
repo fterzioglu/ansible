@@ -23,6 +23,7 @@
         cluster: DemoCS
         datastore: Data
         name: NewVM
+        folder: DemoDC/WazuhServer
         validate_certs: no
         power_on: no
         ovf: /var/lib/awx/template.ova
