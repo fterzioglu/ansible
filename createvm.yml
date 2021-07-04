@@ -22,7 +22,7 @@
         datacenter: DemoDC
         cluster: DemoCS
         datastore: Data
-        name: NewVM
+        name: WazuhSRV
         folder: DemoDC/vm/WazuhServer
         validate_certs: no
         power_on: yes
@@ -39,7 +39,7 @@
         validate_certs: no
         datacenter: DemoDC
         folder: DemoDC/vm/WazuhServer
-        vm_id: NewVM
+        vm_id: WazuhSRV
         vm_username: root
         vm_password: Roma2016**
         vm_shell: "/usr/bin/nmcli"
@@ -54,7 +54,7 @@
         validate_certs: no
         datacenter: DemoDC
         folder: DemoDC/vm/WazuhServer
-        vm_id: NewVM
+        vm_id: WazuhSRV
         vm_username: root
         vm_password: Roma2016**
         vm_shell: "/usr/bin/nmcli"
@@ -69,7 +69,7 @@
         validate_certs: no
         datacenter: DemoDC
         folder: DemoDC/vm/WazuhServer
-        vm_id: NewVM
+        vm_id: WazuhSRV
         vm_username: root
         vm_password: Roma2016**
         vm_shell: "/usr/bin/nmcli"
@@ -84,9 +84,26 @@
         validate_certs: no
         datacenter: DemoDC
         folder: DemoDC/vm/WazuhServer
-        vm_id: NewVM
+        vm_id: WazuhSRV
         vm_username: root
         vm_password: Roma2016**
         vm_shell: "/usr/bin/nmcli"
         vm_shell_args: "networking off && nmcli networking on"
       delegate_to: localhost      
+  
+     - pause: seconds=10
+     
+     - name: restart_services
+      community.vmware.vmware_vm_shell:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        validate_certs: no
+        datacenter: DemoDC
+        folder: DemoDC/vm/WazuhServer
+        vm_id: WazuhSRV
+        vm_username: root
+        vm_password: Roma2016**
+        vm_shell: "/usr/bin/curl"
+        vm_shell_args: "-so ~/unattended-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/unattended-installation/unattended-installation.sh && bash ~/unattended-installation.sh > /root/keys.txt"
+      delegate_to: localhost 
