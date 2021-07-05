@@ -122,5 +122,5 @@
         vm_username: root
         vm_password: Roma2016**
         vm_shell: "/usr/bin/cat"
-        vm_shell_args: "cat /root/keys.txt | grep "The password" > /root/password.txt"
+        vm_shell_args: "/root/keys.txt | grep "The password" > /root/password.txt"
       delegate_to: localhost 
