@@ -1,0 +1,10 @@
+---
+# Bu Playbook agent kurulumu yapar
+   
+- name: Sunucu uzerinde aksiyon al
+  hosts: client
+  gather_facts: false
+
+  tasks:
+  - name: Agent Kur
+    command: sudo WAZUH_MANAGER='172.16.10.41' WAZUH_AGENT_GROUP='default' yum install https://packages.wazuh.com/4.x/yum5/x86_64/wazuh-agent-4.1.5-1.el5.x86_64.rpm
