@@ -108,7 +108,7 @@
         vm_shell_args: "-so ~/unattended-installation.sh https://raw.githubusercontent.com/wazuh/wazuh-documentation/4.1/resources/open-distro/unattended-installation/unattended-installation.sh && bash ~/unattended-installation.sh > /root/keys.txt"
       delegate_to: localhost 
 
-    - pause: seconds=10
+    - pause: seconds=240
     
     - name: Password_Create
       community.vmware.vmware_vm_shell:
@@ -121,6 +121,6 @@
         vm_id: WazuhSRV
         vm_username: root
         vm_password: Roma2016**
-        vm_shell: "/usr/bin/cat"
-        vm_shell_args: "/root/keys.txt | grep "The password" > /root/password.txt"
+        vm_shell: "/usr/bin/bash"
+        vm_shell_args: "cat /root/keys.txt | grep "The password" > /root/password.txt"
       delegate_to: localhost 
