@@ -29,7 +29,7 @@
         ovf: /var/lib/awx/template.ova
       delegate_to: localhost
  
-     - name: Ova Deploy Etme
+    - name: Ova Deploy Etme
       community.vmware.vmware_deploy_ovf:
         hostname: 172.16.10.44
         username: administrator@vsphere.local
