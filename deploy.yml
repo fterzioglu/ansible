@@ -9,7 +9,7 @@
         username: administrator@vsphere.local
         password: Roma2016**
         datacenter: DemoDC
-        folder_name: TestServer
+        folder_name: DemoApplication
         state: present
         validate_certs: no
       delegate_to: localhost
@@ -22,13 +22,58 @@
         datacenter: DemoDC
         cluster: DemoCS
         datastore: Data
-        name: TestSRV
-        folder: DemoDC/vm/TestServer
+        name: Application
+        folder: DemoDC/vm/DemoApplication
         validate_certs: no
         power_on: yes
         ovf: /var/lib/awx/template.ova
       delegate_to: localhost
-    
+ 
+     - name: Ova Deploy Etme
+      community.vmware.vmware_deploy_ovf:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        datacenter: DemoDC
+        cluster: DemoCS
+        datastore: Data
+        name: Database
+        folder: DemoDC/vm/DemoApplication
+        validate_certs: no
+        power_on: yes
+        ovf: /var/lib/awx/template.ova
+      delegate_to: localhost
+      
+    - name: Ova Deploy Etme
+      community.vmware.vmware_deploy_ovf:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        datacenter: DemoDC
+        cluster: DemoCS
+        datastore: Data
+        name: MessageQueue
+        folder: DemoDC/vm/DemoApplication
+        validate_certs: no
+        power_on: yes
+        ovf: /var/lib/awx/template.ova
+      delegate_to: localhost
+      
+    - name: Ova Deploy Etme
+      community.vmware.vmware_deploy_ovf:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        datacenter: DemoDC
+        cluster: DemoCS
+        datastore: Data
+        name: Logging
+        folder: DemoDC/vm/DemoApplication
+        validate_certs: no
+        power_on: yes
+        ovf: /var/lib/awx/template.ova
+      delegate_to: localhost
+      
     - pause: seconds=120
 
     - name: IP adresi Degistirme
@@ -38,8 +83,8 @@
         password: Roma2016**
         validate_certs: no
         datacenter: DemoDC
-        folder: DemoDC/vm/WazuhServer
-        vm_id: TestSRV
+        folder: DemoDC/vm/DemoApplication
+        vm_id: Application
         vm_username: root
         vm_password: Roma2016**
         vm_shell: "/usr/bin/nmcli"
@@ -53,8 +98,8 @@
         password: Roma2016**
         validate_certs: no
         datacenter: DemoDC
-        folder: DemoDC/vm/WazuhServer
-        vm_id: TestSRV
+        folder: DemoDC/vm/DemoApplication
+        vm_id: Application
         vm_username: root
         vm_password: Roma2016**
         vm_shell: "/usr/bin/nmcli"
@@ -68,8 +113,8 @@
         password: Roma2016**
         validate_certs: no
         datacenter: DemoDC
-        folder: DemoDC/vm/WazuhServer
-        vm_id: TestSRV
+        folder: DemoDC/vm/DemoApplication
+        vm_id: Application
         vm_username: root
         vm_password: Roma2016**
         vm_shell: "/usr/bin/nmcli"
@@ -83,8 +128,8 @@
         password: Roma2016**
         validate_certs: no
         datacenter: DemoDC
-        folder: DemoDC/vm/WazuhServer
-        vm_id: TestSRV
+        folder: DemoDC/vm/DemoApplication
+        vm_id: Application
         vm_username: root
         vm_password: Roma2016**
         vm_shell: "/usr/bin/nmcli"
