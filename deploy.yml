@@ -1,0 +1,92 @@
+- name: Vmware Deploy OVA 
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Klasor Olusturma
+      community.vmware.vcenter_folder:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        datacenter: DemoDC
+        folder_name: TestServer
+        state: present
+        validate_certs: no
+      delegate_to: localhost
+      
+    - name: Ova Deploy Etme
+      community.vmware.vmware_deploy_ovf:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        datacenter: DemoDC
+        cluster: DemoCS
+        datastore: Data
+        name: TestSRV
+        folder: DemoDC/vm/TestServer
+        validate_certs: no
+        power_on: yes
+        ovf: /var/lib/awx/template.ova
+      delegate_to: localhost
+    
+    - pause: seconds=120
+
+    - name: IP adresi Degistirme
+      community.vmware.vmware_vm_shell:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        validate_certs: no
+        datacenter: DemoDC
+        folder: DemoDC/vm/WazuhServer
+        vm_id: TestSRV
+        vm_username: root
+        vm_password: Roma2016**
+        vm_shell: "/usr/bin/nmcli"
+        vm_shell_args: "connection modify ens160 IPv4.address 172.16.10.41"
+      delegate_to: localhost
+     
+    - name: Gateway Degistirme
+      community.vmware.vmware_vm_shell:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        validate_certs: no
+        datacenter: DemoDC
+        folder: DemoDC/vm/WazuhServer
+        vm_id: TestSRV
+        vm_username: root
+        vm_password: Roma2016**
+        vm_shell: "/usr/bin/nmcli"
+        vm_shell_args: "connection modify ens160 IPv4.gateway 172.16.10.1"
+      delegate_to: localhost
+
+    - name: DNS Adresi Güncelleme
+      community.vmware.vmware_vm_shell:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        validate_certs: no
+        datacenter: DemoDC
+        folder: DemoDC/vm/WazuhServer
+        vm_id: TestSRV
+        vm_username: root
+        vm_password: Roma2016**
+        vm_shell: "/usr/bin/nmcli"
+        vm_shell_args: "connection modify ens160 IPv4.dns 8.8.8.8"
+      delegate_to: localhost
+      
+    - name: Network Servisleri Restart
+      community.vmware.vmware_vm_shell:
+        hostname: 172.16.10.44
+        username: administrator@vsphere.local
+        password: Roma2016**
+        validate_certs: no
+        datacenter: DemoDC
+        folder: DemoDC/vm/WazuhServer
+        vm_id: TestSRV
+        vm_username: root
+        vm_password: Roma2016**
+        vm_shell: "/usr/bin/nmcli"
+        vm_shell_args: "networking off && nmcli networking on"
+      delegate_to: localhost      
